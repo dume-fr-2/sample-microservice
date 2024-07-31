@@ -1,0 +1,13 @@
+# Patterns to ignore when building packages.
+.DS_Store
+# backup files
+*.swp
+*.bak
+*.tmp
+*.orig
+*~
+# IDEs
+.project
+.idea/
+*.tmproj
+.vscode/

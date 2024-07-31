@@ -1,0 +1,27 @@
+name: app-h
+
+ports:
+  - port: 8000
+    targetPort: 8000
+
+container:
+  image: fastapi-jaeger-app
+  name: app-h
+  ports:
+    - containerPort: 8000
+  env:
+    - name: OTEL_SERVICE_NAME
+      value: app-h
+    - name: OTLP_GRPC_ENDPOINT
+      value: otel-collector-opentelemetry-collector:4317
+    - name: TARGET_ONE_HOST
+      value: ""
+    - name: TARGET_TWO_HOST
+      value: ""
+    - name: TARGET_THREE_HOST
+      value: ""
+
+configMaps:
+  - name: jaeger-config.yml
+    mountPath: /testmicroservices/config/jaeger-config.yml
+    value: jaeger-config
