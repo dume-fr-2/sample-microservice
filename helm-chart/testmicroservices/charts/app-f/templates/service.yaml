@@ -1,1 +1,22 @@
-{{ include "testmicroservices.templates.baseService" . }}
+#{{ include "testmicroservices.templates.baseService" . }}
+{{- define "testmicroservices.templates.baseService" }}
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.app_f.name }}
+spec:
+  type: {{ .Values.type | default .Values.global.serviceType }}
+  ports:
+  {{- range .Values.app_f.ports }}
+  - name: "{{ .port }}"
+    port: {{ .port }}
+    {{- if .protocol}}
+    protocol: {{ .protocol }}
+    {{- end}}
+    targetPort: {{ .targetPort }}
+  {{- end}}
+  selector:
+    service: {{ .Values.app_f.name }}
+
+{{- end }}

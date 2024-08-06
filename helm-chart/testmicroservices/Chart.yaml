@@ -8,7 +8,3 @@ appVersion: "1.16.0"
 dependencies:
   - name: app-a
     version: 0.1.0
-  - name: app-b
-    version: 0.1.0
-  - name: app-c
-    version: 0.1.0

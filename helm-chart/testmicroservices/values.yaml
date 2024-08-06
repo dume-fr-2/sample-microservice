@@ -13,103 +13,213 @@ global:
     samplerParam: 0.01
     disabled: false
     logSpans: false
-app-a:
-  environment:
-    OTEL_SERVICE_NAME: app-a
-    OTLP_GRPC_ENDPOINT: otel-collector-opentelemetry-collector:4317
-    TARGET_ONE_HOST: app-b:8000/chain
-    TARGET_TWO_HOST: app-c:8000/chain
-    TARGET_THREE_HOST: ""
-  repository:
+app_a:
+  name: app-a
+  ports:
+    - port: 8000
+      targetPort: 8000
+  container:
+    name: app-a
     image: fastapi-jaeger-app
-    tag: latest
-app-b:
-  environment:
-    OTEL_SERVICE_NAME: app-b
-    OTLP_GRPC_ENDPOINT: otel-collector-opentelemetry-collector:4317
-    TARGET_ONE_HOST: app-d:8000/chain
-    TARGET_TWO_HOST: app-e:8000/chain
-    TARGET_THREE_HOST: ""
-  repository:
+    ports:
+      - containerPort: 8000
+    env:
+      - name: OTEL_SERVICE_NAME
+        value: app-a
+      - name: OTLP_GRPC_ENDPOINT
+        value: otel-collector-opentelemetry-collector:4317
+      - name: TARGET_ONE_HOST
+        value: app-b:8000/chain
+      - name: TARGET_TWO_HOST
+        value: app-c:8000/chain
+      - name: TARGET_THREE_HOST
+        value: ""
+app_b:
+  name: app-b
+  ports:
+    - port: 8000
+      targetPort: 8000
+  container:
+    name: app-b
     image: fastapi-jaeger-app
-    tag: latest
-app-c:
-  environment:
-    OTEL_SERVICE_NAME: app-c
-    OTLP_GRPC_ENDPOINT: otel-collector-opentelemetry-collector:4317
-    TARGET_ONE_HOST: app-f:8000/cpu_task
-    TARGET_TWO_HOST: app-g:8000/io_task
-    TARGET_THREE_HOST: ""
-  repository:
+    ports:
+      - containerPort: 8000
+    env:
+      - name: OTEL_SERVICE_NAME
+        value: app-b
+      - name: OTLP_GRPC_ENDPOINT
+        value: otel-collector-opentelemetry-collector:4317
+      - name: TARGET_ONE_HOST
+        value: app-d:8000/chain
+      - name: TARGET_TWO_HOST
+        value: app-e:8000/chain
+      - name: TARGET_THREE_HOST
+        value: ""
+app_c:
+  name: app-c
+  ports:
+    - port: 8000
+      targetPort: 8000
+  container:
+    name: app-c
     image: fastapi-jaeger-app
-    tag: latest
-app-d:
-  environment:
-    OTEL_SERVICE_NAME: app-d
-    OTLP_GRPC_ENDPOINT: otel-collector-opentelemetry-collector:4317
-    TARGET_ONE_HOST: app-h:8000/io_task
-    TARGET_TWO_HOST: app-i:8000/cpu_task
-    TARGET_THREE_HOST: ""
-  repository:
+    ports:
+      - containerPort: 8000
+    env:
+      - name: OTEL_SERVICE_NAME
+        value: app-c
+      - name: OTLP_GRPC_ENDPOINT
+        value: otel-collector-opentelemetry-collector:4317
+      - name: TARGET_ONE_HOST
+        value: app-f:8000/cpu_task
+      - name: TARGET_TWO_HOST
+        value: app-g:8000/io_task
+      - name: TARGET_THREE_HOST
+        value: ""
+app_d:
+  name: app-d
+  ports:
+    - port: 8000
+      targetPort: 8000
+  container:
+    name: app-d
     image: fastapi-jaeger-app
-    tag: latest
-app-e:
-  environment:
-    OTEL_SERVICE_NAME: app-e
-    OTLP_GRPC_ENDPOINT: otel-collector-opentelemetry-collector:4317
-    TARGET_ONE_HOST: app-j:8000/io_task
-    TARGET_TWO_HOST: ""
-    TARGET_THREE_HOST: ""
-  repository:
+    ports:
+      - containerPort: 8000
+    env:
+      - name: OTEL_SERVICE_NAME
+        value: app-d
+      - name: OTLP_GRPC_ENDPOINT
+        value: otel-collector-opentelemetry-collector:4317
+      - name: TARGET_ONE_HOST
+        value: app-h:8000/io_task
+      - name: TARGET_TWO_HOST
+        value: ""
+      - name: TARGET_THREE_HOST
+        value: ""
+app_e:
+  name: app-e
+  ports:
+    - port: 8000
+      targetPort: 8000
+  container:
+    name: app-e
     image: fastapi-jaeger-app
-    tag: latest
-app-f:
-  environment:
-    OTEL_SERVICE_NAME: app-f
-    OTLP_GRPC_ENDPOINT: otel-collector-opentelemetry-collector:4317
-    TARGET_ONE_HOST: ""
-    TARGET_TWO_HOST: ""
-    TARGET_THREE_HOST: ""
-  repository:
+    ports:
+      - containerPort: 8000
+    env:
+      - name: OTEL_SERVICE_NAME
+        value: app-e
+      - name: OTLP_GRPC_ENDPOINT
+        value: otel-collector-opentelemetry-collector:4317
+      - name: TARGET_ONE_HOST
+        value: app-j:8000/io_task
+      - name: TARGET_TWO_HOST
+        value: ""
+      - name: TARGET_THREE_HOST
+        value: ""
+app_f:
+  name: app-f
+  ports:
+    - port: 8000
+      targetPort: 8000
+  container:
+    name: app-f
     image: fastapi-jaeger-app
-    tag: latest
-app-g:
-  environment:
-    OTEL_SERVICE_NAME: app-g
-    OTLP_GRPC_ENDPOINT: otel-collector-opentelemetry-collector:4317
-    TARGET_ONE_HOST: ""
-    TARGET_TWO_HOST: ""
-    TARGET_THREE_HOST: ""
-  repository:
+    ports:
+      - containerPort: 8000
+    env:
+      - name: OTEL_SERVICE_NAME
+        value: app-f
+      - name: OTLP_GRPC_ENDPOINT
+        value: otel-collector-opentelemetry-collector:4317
+      - name: TARGET_ONE_HOST
+        value: ""
+      - name: TARGET_TWO_HOST
+        value: ""
+      - name: TARGET_THREE_HOST
+        value: ""
+app_g:
+  name: app-g
+  ports:
+    - port: 8000
+      targetPort: 8000
+  container:
+    name: app-g
     image: fastapi-jaeger-app
-    tag: latest
-app-h:
-  environment:
-    OTEL_SERVICE_NAME: app-h
-    OTLP_GRPC_ENDPOINT: otel-collector-opentelemetry-collector:4317
-    TARGET_ONE_HOST: ""
-    TARGET_TWO_HOST: ""
-    TARGET_THREE_HOST: ""
-  repository:
+    ports:
+      - containerPort: 8000
+    env:
+      - name: OTEL_SERVICE_NAME
+        value: app-g
+      - name: OTLP_GRPC_ENDPOINT
+        value: otel-collector-opentelemetry-collector:4317
+      - name: TARGET_ONE_HOST
+        value: ""
+      - name: TARGET_TWO_HOST
+        value: ""
+      - name: TARGET_THREE_HOST
+        value: ""
+app_h:
+  name: app-h
+  ports:
+    - port: 8000
+      targetPort: 8000
+  container:
+    name: app-h
     image: fastapi-jaeger-app
-    tag: latest
-app-i:
-  environment:
-    OTEL_SERVICE_NAME: app-i
-    OTLP_GRPC_ENDPOINT: otel-collector-opentelemetry-collector:4317
-    TARGET_ONE_HOST: ""
-    TARGET_TWO_HOST: ""
-    TARGET_THREE_HOST: ""
-  repository:
+    ports:
+      - containerPort: 8000
+    env:
+      - name: OTEL_SERVICE_NAME
+        value: app-h
+      - name: OTLP_GRPC_ENDPOINT
+        value: otel-collector-opentelemetry-collector:4317
+      - name: TARGET_ONE_HOST
+        value: ""
+      - name: TARGET_TWO_HOST
+        value: ""
+      - name: TARGET_THREE_HOST
+        value: ""
+app_i:
+  name: app-i
+  ports:
+    - port: 8000
+      targetPort: 8000
+  container:
+    name: app-i
     image: fastapi-jaeger-app
-    tag: latest
-app-j:
-  environment:
-    OTEL_SERVICE_NAME: app-j
-    OTLP_GRPC_ENDPOINT: otel-collector-opentelemetry-collector:4317
-    TARGET_ONE_HOST: ""
-    TARGET_TWO_HOST: ""
-    TARGET_THREE_HOST: ""
-  repository:
+    ports:
+      - containerPort: 8000
+    env:
+      - name: OTEL_SERVICE_NAME
+        value: app-i
+      - name: OTLP_GRPC_ENDPOINT
+        value: otel-collector-opentelemetry-collector:4317
+      - name: TARGET_ONE_HOST
+        value: "app-g:8000/cpu_task"
+      - name: TARGET_TWO_HOST
+        value: ""
+      - name: TARGET_THREE_HOST
+        value: ""
+app_j:
+  name: app-j
+  ports:
+    - port: 8000
+      targetPort: 8000
+  container:
+    name: app-j
     image: fastapi-jaeger-app
-    tag: latest
+    ports:
+      - containerPort: 8000
+    env:
+      - name: OTEL_SERVICE_NAME
+        value: app-j
+      - name: OTLP_GRPC_ENDPOINT
+        value: otel-collector-opentelemetry-collector:4317
+      - name: TARGET_ONE_HOST
+        value: ""
+      - name: TARGET_TWO_HOST
+        value: ""
+      - name: TARGET_THREE_HOST
+        value: ""
